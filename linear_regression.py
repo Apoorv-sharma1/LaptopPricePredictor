@@ -5,7 +5,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 
 df = pd.read_csv("cleaned_laptop_data.csv")
-
 df = pd.get_dummies(df, drop_first=True)
 
 X = df.drop(columns=['Price'])
@@ -22,11 +21,13 @@ r2 = r2_score(y_test,y_pred)
 mae = mean_absolute_error(y_test,y_pred)
 mse = mean_squared_error(y_test,y_pred)
 rmse = np.sqrt(mse)
+accuracy = 100 - (np.mean(np.abs((y_test - y_pred) / y_test)) * 100)
 
 print("R2 Score:", r2)
 print("MAE:", mae)
 print("MSE:", mse)
 print("RMSE:", rmse)
+print("Accuracy:", accuracy)
 
 if r2 > 0.8:
     print("Model Performance: Very Good")
